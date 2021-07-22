@@ -45,14 +45,16 @@ export class ProjectsService {
     if (this.userSubscription && !this.userSubscription.closed) {
       this.userSubscription.unsubscribe();
     }
-    const userBusyIndicatorId = this.busyIndicator.show();
+    const userBusyIndicatorId = this.busyIndicator.show('getUserDetails()');
     this.userSubscription = this.angularFireAuth.user.subscribe((user) => {
       if (user) {
         this.user = user;
         this.uid = user.uid;
-        this.getProjectsList();
+        setTimeout(() => {
+          this.busyIndicator.hide(userBusyIndicatorId);
+          this.getProjectsList();
+        }, 200);
       }
-      this.busyIndicator.hide(userBusyIndicatorId);
     });
   }
 
@@ -60,7 +62,8 @@ export class ProjectsService {
     if (this.getProductsSubscription && !this.getProductsSubscription.closed) {
       this.getProductsSubscription.unsubscribe();
     }
-    const getProjectsBusyIndicatorId = this.busyIndicator.show();
+    const getProjectsBusyIndicatorId =
+      this.busyIndicator.show('getProjectsList()');
     this.getProductsSubscription = this.angularFirestore
       .collection<IProject>('projects', (ref) =>
         ref
@@ -71,7 +74,6 @@ export class ProjectsService {
       .valueChanges({ idField: 'id' })
       .subscribe(
         (projects) => {
-          debugger;
           this.projectsAction.next(projects);
           setTimeout(() => {
             this.busyIndicator.hide(getProjectsBusyIndicatorId);
@@ -90,6 +92,12 @@ export class ProjectsService {
 
   public getProjects(): Observable<IProject[]> {
     return this.projectsAction.asObservable();
+  }
+  public deleteProject(project: IProject): Promise<any> {
+    return this.angularFirestore
+      .collection(PROJECTS_COLLECTION)
+      .doc(project.id)
+      .update({ deleted: true });
   }
   public addProject(project: IProject): Promise<any> {
     return this.angularFirestore.collection(PROJECTS_COLLECTION).add(project);

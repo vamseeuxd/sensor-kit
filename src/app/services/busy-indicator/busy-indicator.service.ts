@@ -19,10 +19,11 @@ export class BusyIndicatorService {
     await this.loading.present();
   }
 
-  show(): number {
+  show(logMessage = ''): number {
     const indicatorId = new Date().getTime();
     setTimeout(() => {
       this.busyIndicatorsList.push(indicatorId);
+      // console.log('Show', logMessage, this.busyIndicatorsList);
       this.presentLoading();
     });
     return indicatorId;
@@ -32,7 +33,9 @@ export class BusyIndicatorService {
     this.busyIndicatorsList = this.busyIndicatorsList.filter(
       (id) => id !== busyIndicatorId
     );
-    if (this.busyIndicatorsList.length === 0) {
+    // console.log('Hide Before', this.busyIndicatorsList);
+    if (this.busyIndicatorsList.length === 0 && this.loading) {
+      // console.log('Hide After', this.busyIndicatorsList);
       this.loading.dismiss();
     }
   }

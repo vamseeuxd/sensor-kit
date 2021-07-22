@@ -1,7 +1,7 @@
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BusyIndicatorService } from './../../services/busy-indicator/busy-indicator.service';
-import { ProjectsService } from './../../services/projects/projects.service';
+import { ProjectsService, IProject } from './../../services/projects/projects.service';
 import { IonInput, ModalController } from '@ionic/angular';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import firebase from 'firebase/app';
@@ -13,7 +13,7 @@ import firebase from 'firebase/app';
 })
 export class AddProjectComponent implements OnInit, AfterViewInit {
   @ViewChild('projectName', { static: true }) projectName: IonInput;
-
+  data: IProject;
   constructor(
     public projects: ProjectsService,
     private modalController: ModalController,
