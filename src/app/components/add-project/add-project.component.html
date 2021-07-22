@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title *ngIf="!data">Add New Project</ion-title>
-    <ion-title *ngIf="data">Update Project</ion-title>
+    <ion-title *ngIf="data">Update Project "{{data?.name}}"</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -42,9 +42,8 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button (click)="addProject(sampleForm)" [disabled]="sampleForm.invalid" color="primary"
-          >Add</ion-button
-        >
+        <ion-button *ngIf="!data" (click)="addProject(sampleForm)" [disabled]="sampleForm.invalid" color="primary">Add</ion-button>
+        <ion-button *ngIf="data" (click)="updateProject(sampleForm)" [disabled]="sampleForm.invalid" color="primary">Update</ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button (click)="dismiss()">Cancel</ion-button>

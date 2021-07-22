@@ -49,21 +49,35 @@ export class AddProjectComponent implements OnInit, AfterViewInit {
         () => {
           this.busyIndicator.hide(addBusyIndicatorId);
           form.resetForm({});
-          this.snackBar.open(
-            'New Project added Successfully',
-            'Project Added',
-            {
-              duration: 2000,
-            }
-          );
+          this.snackBar.open('New Project added Successfully', 'Project Added', {duration: 2000,});
           this.dismiss();
         },
         (error) => {
-          this.snackBar.open(
-            'Error while getting Projects List (' + error.message + ')',
-            'Error',
-            { duration: 4000 }
-          );
+          this.snackBar.open('Error while Adding Project (' + error.message + ')','Error',{ duration: 4000 });
+          this.busyIndicator.hide(addBusyIndicatorId);
+        }
+      );
+  }
+
+  updateProject(form: NgForm) {
+    const addBusyIndicatorId = this.busyIndicator.show();
+    this.projects
+      .updateProject({
+        ...form.value,
+        id:this.data.id,
+        uid: this.data.uid,
+        deleted: false,
+        modifiedOn: firebase.firestore.Timestamp.now().seconds * 1000,
+      })
+      .then(
+        () => {
+          this.busyIndicator.hide(addBusyIndicatorId);
+          form.resetForm({});
+          this.snackBar.open('Project updated Successfully', 'Project Updated', {duration: 2000,});
+          this.dismiss();
+        },
+        (error) => {
+          this.snackBar.open('Error while Updating Project (' + error.message + ')','Error',{ duration: 4000 });
           this.busyIndicator.hide(addBusyIndicatorId);
         }
       );

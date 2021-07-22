@@ -101,15 +101,8 @@ export class ProjectsService {
   }
   public addProject(project: IProject): Promise<any> {
     return this.angularFirestore.collection(PROJECTS_COLLECTION).add(project);
-    /* const addBusyIndicatorId = this.busyIndicator.show();
-    this.angularFirestore
-      .collection('projects')
-      .add(project)
-      .then(() => {
-        this.busyIndicator.hide(addBusyIndicatorId);
-        this.snackBar.open('New Project added Successfully', 'Project Added', {
-          duration: 2000,
-        });
-      }); */
+  }
+  public updateProject(project: IProject): Promise<any> {
+    return this.angularFirestore.collection(PROJECTS_COLLECTION).doc(project.id).update(project);
   }
 }
