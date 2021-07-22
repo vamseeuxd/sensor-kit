@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ngx-auth-firebaseui
+    [providers]="[providers.Google]"
+    (onSuccess)="printUser($event)"
+    (onError)="printError($event)"
+    [guestEnabled]="false"
+  ></ngx-auth-firebaseui>
+</ion-content>
