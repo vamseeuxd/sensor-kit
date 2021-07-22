@@ -56,6 +56,7 @@ export class AddProjectComponent implements OnInit, AfterViewInit {
               duration: 2000,
             }
           );
+          this.dismiss();
         },
         (error) => {
           this.snackBar.open(
