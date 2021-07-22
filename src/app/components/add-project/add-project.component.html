@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add New Project</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form #sampleForm="ngForm">
+    <ion-list lines="full" class="ion-no-margin">
+      <ion-item>
+        <ion-label position="stacked">Project Name</ion-label>
+        <ion-input
+          ngModel
+          name="name"
+          required
+          #projectName
+          placeholder="Project Name"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Multiple Inputs</ion-label>
+        <ion-input
+          ngModel
+          required
+          name="address1"
+          placeholder="Address Line 1"
+        ></ion-input>
+        <ion-input
+          ngModel
+          required
+          name="address2"
+          placeholder="Address Line 2"
+        ></ion-input>
+        <ion-input ngModel required name="city" placeholder="City"></ion-input>
+        <ion-input
+          ngModel
+          required
+          name="state"
+          placeholder="State"
+        ></ion-input>
+        <ion-input
+          ngModel
+          required
+          name="zipCode"
+          placeholder="Zip Code"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="projects.addProject(sampleForm.value)" [disabled]="sampleForm.invalid" color="primary"
+          >Add</ion-button
+        >
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">Cancel</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+</ion-footer>

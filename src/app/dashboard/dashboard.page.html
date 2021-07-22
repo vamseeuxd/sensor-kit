@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>AQ-Admin Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- List of Text Items -->
+  <ion-list>
+    <ion-item routerDirection="forward" [routerLink]="'/projects'" detail="true">
+      <ion-icon slot="start" [ios]="'bookmarks-outline'" [md]="'bookmarks-sharp'"></ion-icon>
+      <ion-label>Projects</ion-label>
+    </ion-item>
+    <ion-item routerDirection="forward" [routerLink]="'/ponds'" detail="true">
+      <ion-icon slot="start" [ios]="'grid-outline'" [md]="'grid-sharp'"></ion-icon>
+      <ion-label>Ponds</ion-label>
+    </ion-item>
+    <ion-item routerDirection="forward" [routerLink]="'/ph-sensors'" detail="true">
+      <ion-icon slot="start" [ios]="'wifi-outline'" [md]="'wifi-sharp'"></ion-icon>
+      <ion-label>PH Sensors</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
