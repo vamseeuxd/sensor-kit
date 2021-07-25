@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>AQ-Admin Projects</ion-title>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -34,7 +34,7 @@
 
       <ion-item-sliding #slidingItem *ngFor="let project of projectsList">
 
-        <ion-item>
+        <ion-item detail [routerLink]="[ '../ponds', project.id ]">
           <ion-avatar slot="start">
             <ngx-avatar [name]="project.name"></ngx-avatar>
           </ion-avatar>

@@ -20,12 +20,28 @@ const routes: Routes = [
     loadChildren: () => import('./projects/projects.module').then( m => m.ProjectsPageModule)
   },
   {
-    path: 'ponds',
+    path: 'ponds/:projectId',
     loadChildren: () => import('./ponds/ponds.module').then( m => m.PondsPageModule)
   },
   {
     path: 'ph-sensors',
     loadChildren: () => import('./ph-sensors/ph-sensors.module').then( m => m.PhSensorsPageModule)
+  },
+  {
+    path: 'dissolved-oxygen-sensors',
+    loadChildren: () => import('./dissolved-oxygen-sensors/dissolved-oxygen-sensors.module').then( m => m.DissolvedOxygenSensorsPageModule)
+  },
+  {
+    path: 'turbidity-sensors',
+    loadChildren: () => import('./turbidity-sensors/turbidity-sensors.module').then( m => m.TurbiditySensorsPageModule)
+  },
+  {
+    path: 'tds-sensors',
+    loadChildren: () => import('./tdssensors/tdssensors.module').then( m => m.TDSSensorsPageModule)
+  },
+  {
+    path: 'temperature-sensors',
+    loadChildren: () => import('./temperature-sensors/temperature-sensors.module').then( m => m.TemperatureSensorsPageModule)
   },
   {
     path: 'folder/:id',
@@ -50,6 +66,22 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'dissolved-oxygen-sensors',
+    loadChildren: () => import('./dissolved-oxygen-sensors/dissolved-oxygen-sensors.module').then( m => m.DissolvedOxygenSensorsPageModule)
+  },
+  {
+    path: 'turbidity-sensors',
+    loadChildren: () => import('./turbidity-sensors/turbidity-sensors.module').then( m => m.TurbiditySensorsPageModule)
+  },
+  {
+    path: 'tdssensors',
+    loadChildren: () => import('./tdssensors/tdssensors.module').then( m => m.TDSSensorsPageModule)
+  },
+  {
+    path: 'temperature-sensors',
+    loadChildren: () => import('./temperature-sensors/temperature-sensors.module').then( m => m.TemperatureSensorsPageModule)
   }
 ];
 

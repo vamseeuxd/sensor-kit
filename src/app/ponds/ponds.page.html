@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>AQ-Admin Ponds</ion-title>
     <ion-buttons slot="end">
@@ -9,4 +9,67 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content> </ion-content>
+<ion-content>
+  <ng-container
+    *ngIf="projects.getSelectedProject() | async as selectedProject; else invalidProjectTempRef"
+  >
+    <!-- <pre>{{projects.getSelectedProject() | async | json}}</pre> -->
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{selectedProject.name | ucwords}}</ion-card-title>
+        <ion-card-subtitle>
+          {{ selectedProject.addressLine1 | ucwords }}
+          <!-- Address Line 1 -->
+          {{ selectedProject.addressLine2 | ucwords }}
+          <!-- Address Line 2 -->, {{ selectedProject.city | ucwords }}
+          <!-- City -->, {{ selectedProject.state | ucwords }}
+          <!-- State -->, {{ selectedProject.country | ucwords }}
+          <!-- Country -->, {{ selectedProject.zipCode | ucwords }}
+          <!-- Zip Code -->
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <h4>List of Ponds</h4>
+        <ion-list lines="full">
+          <ion-item
+            *ngFor="let pond of selectedProject.ponds"
+            class="ion-activated"
+          >
+            <!-- <ion-icon name="wifi" slot="start"></ion-icon> -->
+            <!-- <ion-label>{{pond.name}}</ion-label> -->
+            <!-- <ion-icon name="checkmark-circle" slot="start"></ion-icon> -->
+            <ion-label>
+              <h2><ion-text>{{pond.name}}</ion-text></h2>
+              <!-- <h3 class="ion-text-center">Current Water PH Details</h3> -->
+              <!-- <h4 class="ion-padding-start">PH Value: <ion-note class="ion-float-right" slot="end">7.5</ion-note></h4>
+              <h4 class="ion-padding-start">Dissolved Oxygen: <ion-note class="ion-float-right" slot="end">7.5</ion-note></h4>
+              <h4 class="ion-padding-start">Minerals in Water: <ion-note class="ion-float-right" slot="end">7.5</ion-note></h4> -->
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- <ion-list lines="full">
+
+    </ion-list> -->
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="ion-margin">
+      <ion-fab-button (click)="addPond(selectedProject.id)">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ng-container>
+</ion-content>
+
+<<ng-template #invalidProjectTempRef>
+  <h4 class="ion-text-center ion-padding-top ion-margin-top">
+    <ion-text color="medium">No Project to show</ion-text>
+    <br />
+    <ion-button routerLink="../../home" class="ion-margin-top" color="primary"
+      >Go to Home</ion-button
+    >
+  </h4>
+</ng-template>

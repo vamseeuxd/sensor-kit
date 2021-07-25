@@ -22,9 +22,14 @@ export class BusyIndicatorService {
   show(logMessage = ''): number {
     const indicatorId = new Date().getTime();
     setTimeout(() => {
+      this.hide(indicatorId);
+      // console.log(logMessage, indicatorId);
+    }, 5000);
+    setTimeout(() => {
+      if (this.busyIndicatorsList.length === 0) {
+        this.presentLoading();
+      }
       this.busyIndicatorsList.push(indicatorId);
-      // console.log('Show', logMessage, this.busyIndicatorsList);
-      this.presentLoading();
     });
     return indicatorId;
   }
@@ -33,9 +38,7 @@ export class BusyIndicatorService {
     this.busyIndicatorsList = this.busyIndicatorsList.filter(
       (id) => id !== busyIndicatorId
     );
-    // console.log('Hide Before', this.busyIndicatorsList);
     if (this.busyIndicatorsList.length === 0 && this.loading) {
-      // console.log('Hide After', this.busyIndicatorsList);
       this.loading.dismiss();
     }
   }
