@@ -1,6 +1,6 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BusyIndicatorService } from './../services/busy-indicator/busy-indicator.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import {
   IProject,
   ProjectsService,
@@ -22,6 +22,7 @@ export class PondsPage implements OnInit {
     public projects: ProjectsService,
     private modalController: ModalController,
     private busyIndicator: BusyIndicatorService,
+    public alertController: AlertController,
     public snackBar: MatSnackBar
   ) {}
 
@@ -32,11 +33,45 @@ export class PondsPage implements OnInit {
     });
   }
 
-  addPond(projectId) {
+  async addPond(projectId) {
+    const alert = await this.alertController.create({
+      header: 'Add Pond in Project',
+      message:'Pond Name required minmimum 3 Charectors',
+      inputs: [
+        {
+          name: 'pondName',
+          type: 'text',
+          placeholder: 'Pond Name',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            // console.log('Confirm Cancel');
+          },
+        },
+        {
+          text: 'Ok',
+          handler: ({ pondName }) => {
+            if (pondName && pondName.trim().length > 0) {
+              this.addPond1(projectId, pondName, alert);
+            }
+            return false;
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  addPond1(projectId, pondName, alert) {
     const addBusyIndicatorId = this.busyIndicator.show();
     this.projects
       .addPond({
-        name: 'Test 002',
+        name: pondName,
         uid: this.projects.uid,
         projectId,
         deleted: false,
@@ -44,8 +79,9 @@ export class PondsPage implements OnInit {
         modifiedOn: firebase.firestore.Timestamp.now().seconds * 1000,
       })
       .then(
-        () => {
+        async () => {
           this.busyIndicator.hide(addBusyIndicatorId);
+          await alert.dismiss();
           this.snackBar.open('New Pond added Successfully', 'Pond Added', {
             duration: 2000,
           });
