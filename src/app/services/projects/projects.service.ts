@@ -86,12 +86,26 @@ export class ProjectsService {
       .update({ deleted: true });
   }
 
+  public deletePond(pond: IPond): Promise<any> {
+    return this.angularFirestore
+      .collection(PONDS_COLLECTION)
+      .doc(pond.id)
+      .update({ deleted: true });
+  }
+
   public addProject(project: IProject): Promise<any> {
     return this.angularFirestore.collection(PROJECTS_COLLECTION).add(project);
   }
 
   public addPond(pond: IPond): Promise<any> {
     return this.angularFirestore.collection(PONDS_COLLECTION).add(pond);
+  }
+
+  public updatePond(pond: IPond): Promise<any> {
+    return this.angularFirestore
+      .collection(PONDS_COLLECTION)
+      .doc(pond.id)
+      .update(pond);
   }
 
   public updateProject(project: IProject): Promise<any> {
