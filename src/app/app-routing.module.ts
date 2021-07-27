@@ -60,6 +60,10 @@ const routes: Routes = [
     loadChildren: () => import('./ponds/ponds.module').then( m => m.PondsPageModule)
   },
   {
+    path: 'pond-details/:id',
+    loadChildren: () => import('./pond-details/pond-details.module').then( m => m.PondDetailsPageModule)
+  },
+  {
     path: 'ph-sensors',
     loadChildren: () => import('./ph-sensors/ph-sensors.module').then( m => m.PhSensorsPageModule)
   },
@@ -82,6 +86,10 @@ const routes: Routes = [
   {
     path: 'temperature-sensors',
     loadChildren: () => import('./temperature-sensors/temperature-sensors.module').then( m => m.TemperatureSensorsPageModule)
+  },
+  {
+    path: 'pond-details',
+    loadChildren: () => import('./pond-details/pond-details.module').then( m => m.PondDetailsPageModule)
   }
 ];
 

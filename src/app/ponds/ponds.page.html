@@ -3,10 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-title>AQ-Admin Ponds</ion-title>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+    <ion-title>Ponds</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -26,7 +23,7 @@
         <h4>List of Ponds</h4>
         <ion-list lines="full">
           <ion-item-sliding #itemSliding *ngFor="let pond of selectedProject.ponds">
-            <ion-item class="ion-activated" detail>
+            <ion-item class="ion-activated" detail [routerLink]="['/pond-details', pond.id]">
               <ion-label> {{pond.name}} </ion-label>
             </ion-item>
             <ion-item-options side="end">
