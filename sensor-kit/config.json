@@ -1,0 +1,11 @@
+{
+  "id": "00001",
+  "sensor-kits-id": "rY7oSZF80aMpavELwzlV",
+  "default-values": {
+    "turbidity-value": 0,
+    "tds-value": 0,
+    "ph-value": 0,
+    "temperature-value": 0,
+    "do-value": 0
+  }
+}

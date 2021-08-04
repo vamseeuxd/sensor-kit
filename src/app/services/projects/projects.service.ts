@@ -43,8 +43,7 @@ export class ProjectsService {
   public user: firebase.User | null;
   private projectsAction: BehaviorSubject<IProject[]> = new BehaviorSubject([]);
   private selectedProjectId: BehaviorSubject<string> = new BehaviorSubject('');
-  private selectedProject: BehaviorSubject<IProject | null> =
-    new BehaviorSubject(null);
+  private selectedProject: BehaviorSubject<IProject | null> = new BehaviorSubject(null);
   private userSubscription: Subscription | undefined;
   private getProductsSubscription: Subscription | undefined;
 

@@ -8,43 +8,38 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>
-      Water Statatics as on {{selectedDate|date:'MMM dd, yyyy, hh:mm a'}}
-    </ion-list-header>
-    <ion-item button>
-      <ion-label>PH <sub>( 7.5 to 8.5 )</sub></ion-label>
-      <ion-note slot="end" color="primary"
-        ><h4 class="ion-no-padding ion-no-margin">7.50</h4></ion-note
-      >
-    </ion-item>
+  <ng-container *ngIf="pondDetails$ | async as pondDetails">
+    <!-- <pre>{{pondDetails|json}}</pre> -->
+    <ion-list>
+      <ion-list-header>Current Water Statatics</ion-list-header>
 
-    <ion-item button>
-      <ion-label>Dissolved Oxygen <sub>( 80 to 120 % )</sub></ion-label>
-      <ion-note slot="end" color="secondary"
-        ><h4 class="ion-no-padding ion-no-margin">99%</h4></ion-note
-      >
-    </ion-item>
+      <ion-item button>
+        <ion-label>PH <sub>( 7.5 to 8.5 )</sub></ion-label>
+        <ion-note slot="end" color="primary"><h4 class="ion-no-padding ion-no-margin">{{pondDetails['ph-value']}}</h4></ion-note>
+      </ion-item>
 
-    <ion-item button>
-      <ion-label>Turbidity</ion-label>
-      <ion-note slot="end" color="tertiary"
-        ><h4 class="ion-no-padding ion-no-margin">99%</h4></ion-note
-      >
-    </ion-item>
+      <ion-item button>
+        <ion-label>Dissolved Oxygen <sub>( 80 to 120 % )</sub></ion-label>
+        <ion-note slot="end" color="secondary"><h4 class="ion-no-padding ion-no-margin">{{pondDetails['do-value']}}</h4></ion-note>
+      </ion-item>
 
-    <ion-item button>
-      <ion-label>TDS</ion-label>
-      <ion-note slot="end" color="success"
-        ><h4 class="ion-no-padding ion-no-margin">99%</h4></ion-note
-      >
-    </ion-item>
+      <ion-item button>
+        <ion-label>Turbidity</ion-label>
+        <ion-note slot="end" color="tertiary"><h4 class="ion-no-padding ion-no-margin">{{pondDetails['turbidity-value']}}</h4></ion-note>
+      </ion-item>
 
-    <ion-item button>
-      <ion-label>Temperature</ion-label>
-      <ion-note slot="end" color="warning"
-        ><h4 class="ion-no-padding ion-no-margin">99%</h4></ion-note
-      >
-    </ion-item>
-  </ion-list>
+      <ion-item button>
+        <ion-label>TDS</ion-label>
+        <ion-note slot="end" color="success"><h4 class="ion-no-padding ion-no-margin">{{pondDetails['tds-value']}}</h4></ion-note>
+      </ion-item>
+
+      <ion-item button>
+        <ion-label>Temperature</ion-label>
+        <ion-note slot="end" color="warning"><h4 class="ion-no-padding ion-no-margin">{{pondDetails['temperature-value']}}</h4></ion-note>
+      </ion-item>
+    </ion-list>
+
+  </ng-container>
+
+  <!-- <pre *ngIf="pondDetails$ | async as pondDetails">{{pondDetails | json}}</pre> -->
 </ion-content>
