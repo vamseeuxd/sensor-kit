@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./index.js "
+    "start": "nodemon ./index.js ",
+    "start2": "node arduno.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "serialport": "^9.2.0"
   },
   "dependencies": {
     "firebase-admin": "^9.11.0"
